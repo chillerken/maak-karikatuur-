@@ -1,1 +1,129 @@
-<!DOCTYPE html>\n<html lang="en">\n<head>\n    <meta charset="UTF-8">\n    <meta name="viewport" content="width=device-width, initial-scale=1.0">\n    <title>Improved Page</title>\n    <style>\n        body {\n            font-family: Arial, sans-serif;\n            background-color: #f4f4f4;\n            margin: 0;\n            padding: 20px;\n        }\n        form {\n            background: #fff;\n            padding: 20px;\n            border-radius: 5px;\n            box-shadow: 0 0 10px rgba(0,0,0,0.1);\n        }\n        input, button {\n            margin: 10px 0;\n            padding: 10px;\n            width: 100%;\n            border: 1px solid #ddd;\n            border-radius: 5px;\n        }\n        button {\n            background-color: #5cb85c;\n            color: white;\n            cursor: pointer;\n        }\n        button:hover {\n            background-color: #4cae4c;\n        }\n        .error {\n            color: red;\n        }\n    </style>\n</head>\n<body>\n    <h1>Submit Your Information</h1>\n    <form id="infoForm">\n        <input type="text" id="name" placeholder="Your Name" required />\n        <input type="email" id="email" placeholder="Your Email" required />\n        <button type="submit">Submit</button>\n        <div class="error" id="errorMessage"></div>\n    </form>\n    <script>\n        document.getElementById('infoForm').addEventListener('submit', function(event) {\n            event.preventDefault();\n            const name = document.getElementById('name').value;\n            const email = document.getElementById('email').value;\n            const errorMessage = document.getElementById('errorMessage');\n            errorMessage.textContent = '';\n\n            if (!name || !email) {\n                errorMessage.textContent = 'All fields are required!';\n                return;\n            }\n\n            // Example of API Integration\n            fetch('https://api.example.com/submit', {\n                method: 'POST',\n                headers: { 'Content-Type': 'application/json' },\n                body: JSON.stringify({ name, email })\n            })\n            .then(response => {\n                if (!response.ok) throw new Error('Network response was not ok');\n                return response.json();\n            })\n            .then(data => {\n                alert('Form submitted successfully!');\n            })\n            .catch((error) => {\n                errorMessage.textContent = 'Error: ' + error.message;\n            });\n        });\n    </script>\n</body>\n</html>
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karikatuur Creator - AI-Powered Caricature Generator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="header">
+                <h1>🎨 Maak je Karikatuur</h1>
+                <p class="subtitle">Met AI-gegenereerde illustraties</p>
+            </div>
+
+            <form id="caricatureForm" class="form">
+                <!-- Profession Input -->
+                <div class="form-group">
+                    <label for="job">Wat is je beroep?</label>
+                    <input 
+                        type="text" 
+                        id="job" 
+                        placeholder="bijv. Chef-kok, IT-specialist, Verpleegkundige..."
+                        required
+                    >
+                    <span class="error-message" id="jobError"></span>
+                </div>
+
+                <!-- Hobbies Input -->
+                <div class="form-group">
+                    <label for="hobbies">Wat zijn je hobby's?</label>
+                    <input 
+                        type="text" 
+                        id="hobbies" 
+                        placeholder="bijv. Gitaar spelen, vissen, fitness, schilderen..."
+                        required
+                    >
+                    <span class="error-message" id="hobbiesError"></span>
+                </div>
+
+                <!-- Photo Upload -->
+                <div class="form-group">
+                    <label for="file-input">Upload je foto</label>
+                    <div class="upload-zone" id="uploadZone">
+                        <div class="upload-content">
+                            <span class="upload-icon">📸</span>
+                            <p>Klik of sleep een foto hierheen</p>
+                            <p class="upload-hint">JPG, PNG - max 5MB</p>
+                        </div>
+                        <input 
+                            type="file" 
+                            id="file-input" 
+                            hidden 
+                            accept="image/*"
+                        >
+                    </div>
+                    <img id="preview-img" class="preview-img" src="" alt="Preview">
+                    <span class="error-message" id="fileError"></span>
+                </div>
+
+                <!-- Style Selector -->
+                <div class="form-group">
+                    <label for="style">Karikatuur Stijl</label>
+                    <select id="style" class="style-select">
+                        <option value="cartoon">Cartoon (Kleurig & Speels)</option>
+                        <option value="sketch">Schets (Zwart-wit & Gedetailleerd)</option>
+                        <option value="oil">Olieverf (Klassiek Kunstwerk)</option>
+                        <option value="digital">Digitaal (Modern & Helder)</option>
+                    </select>
+                </div>
+
+                <!-- Generate Button -->
+                <button type="submit" class="generate-btn" id="generateBtn">
+                    <span class="btn-text">Genereer Illustratie</span>
+                    <span class="btn-loader" style="display: none;">
+                        <span class="spinner"></span> Aan het genereren...
+                    </span>
+                </button>
+
+                <!-- Terms -->
+                <div class="terms-checkbox">
+                    <input type="checkbox" id="terms" required>
+                    <label for="terms">Ik ga akkoord met de gebruiksvoorwaarden</label>
+                </div>
+            </form>
+
+            <!-- Result Display -->
+            <div id="resultSection" class="result-section" style="display: none;">
+                <h2>🎉 Je Karikatuur is Klaar!</h2>
+                <img id="resultImage" class="result-image" src="" alt="Generated Caricature">
+                <div class="result-info">
+                    <p><strong>Beroep:</strong> <span id="resultJob"></span></p>
+                    <p><strong>Hobby's:</strong> <span id="resultHobbies"></span></p>
+                    <p><strong>Stijl:</strong> <span id="resultStyle"></span></p>
+                </div>
+                <div class="action-buttons">
+                    <button class="btn-download" id="downloadBtn">⬇️ Download Afbeelding</button>
+                    <button class="btn-reset" id="resetBtn">↻ Maak Nieuwe Karikatuur</button>
+                </div>
+            </div>
+
+            <!-- Error Display -->
+            <div id="errorSection" class="error-section" style="display: none;">
+                <h3>❌ Er is iets fout gegaan</h3>
+                <p id="errorMessage"></p>
+                <button class="btn-reset" onclick="resetForm()">Probeer opnieuw</button>
+            </div>
+        </div>
+
+        <!-- Info Section -->
+        <div class="info-section">
+            <h3>ℹ️ Hoe werkt het?</h3>
+            <ol>
+                <li>Vul je beroep en hobby's in</li>
+                <li>Upload een foto van jezelf</li>
+                <li>Kies een karikatuur stijl</li>
+                <li>Laat de AI een unieke illustratie creëren</li>
+                <li>Download en deel je kunstwerk!</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast" class="toast"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
