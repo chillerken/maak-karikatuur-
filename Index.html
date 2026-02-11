@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karikatuur Creator</title>
+    <style>
+        :root {
+            --primary: #ffde59;
+            --accent: #ff5757;
+            --bg: #f0f2f5;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background-color: var(--bg);
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            width: 100%;
+            max-width: 500px;
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        h2 { text-align: center; color: #333; }
+
+        .form-group { margin-bottom: 15px; }
+
+        label { display: block; margin-bottom: 5px; font-weight: bold; color: #555; }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus { border-color: var(--primary); }
+
+        .upload-zone {
+            border: 2px dashed #ccc;
+            padding: 20px;
+            text-align: center;
+            border-radius: 15px;
+            margin: 20px 0;
+            cursor: pointer;
+        }
+
+        #preview-img {
+            width: 100%;
+            border-radius: 15px;
+            margin-top: 15px;
+            display: none;
+            border: 4px solid var(--primary);
+        }
+
+        .generate-btn {
+            width: 100%;
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .generate-btn:hover { transform: scale(1.02); }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Maak je Karikatuur</h2>
+    
+    <div class="form-group">
+        <label>Wat is je beroep?</label>
+        <input type="text" id="job" placeholder="bijv. Chef-kok, IT-specialist...">
+    </div>
+
+    <div class="form-group">
+        <label>Wat zijn je hobby's?</label>
+        <input type="text" id="hobbies" placeholder="bijv. Gitaar spelen, vissen, fitness">
+    </div>
+
+    <div class="upload-zone" onclick="document.getElementById('file-input').click()">
+        <span>📸 Klik om een foto te uploaden</span>
+        <input type="file" id="file-input" hidden accept="image/*" onchange="showPreview(event)">
+        <img id="preview-img" src="">
+    </div>
+
+    <button class="generate-btn" onclick="generateCaricature()">Genereer Illustratie</button>
+</div>
+
+<script>
+    function showPreview(event) {
+        const reader = new FileReader();
+        reader.onload = function() {
+            const img = document.getElementById('preview-img');
+            img.src = reader.result;
+            img.style.display = 'block';
+        }
+        reader.readAsDataURL(event.target.files[0]);
+    }
+
+    function generateCaricature() {
+        const job = document.getElementById('job').value;
+        const hobbies = document.getElementById('hobbies').value;
+        
+        if(!job || !hobbies) {
+            alert("Vul a.u.be. eerst je beroep en hobby's in!");
+            return;
+        }
+
+        alert("Gegevens verzameld!\nBeroep: " + job + "\nHobby's: " + hobbies + "\n\nDe AI zou nu een karikatuur maken op basis van deze info.");
+        // Hier zou je normaal gesproken de data naar een API sturen.
+    }
+</script>
+
+</body>
+</html>
