@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karikatuur Profiel - Modern Digital Art</title>
+    <style>
+        :root {
+            --primary-color: #ff4757;
+            --secondary-color: #2f3542;
+            --accent-color: #ffa502;
+            --bg-color: #f1f2f6;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            width: 400px;
+            padding: 30px;
+            text-align: center;
+            border-top: 8px solid var(--primary-color);
+        }
+
+        .illustration-container {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            border: 5px solid var(--accent-color);
+            overflow: hidden;
+            background: #eee;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .illustration-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        h1 {
+            margin: 10px 0;
+            color: var(--secondary-color);
+            font-size: 24px;
+        }
+
+        .tagline {
+            color: #747d8c;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-top: 20px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+        }
+
+        .badge-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .badge {
+            background: var(--secondary-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            transition: transform 0.2s;
+        }
+
+        .badge:hover {
+            transform: scale(1.1);
+            background: var(--accent-color);
+        }
+
+        .hobby-icons {
+            font-size: 24px;
+            margin-top: 15px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div class="illustration-container">
+            <img src="https://via.placeholder.com/200?text=Karikatuur+Hier" alt="Karikatuur Illustratie">
+        </div>
+
+        <h1>Naam van de Persoon</h1>
+        <p class="tagline">"De perfecte mix van werk en passie"</p>
+
+        <div class="section-title">Beroep & Skills</div>
+        <div class="badge-container">
+            <span class="badge">💻 Software Developer</span>
+            <span class="badge">🎨 Digital Artist</span>
+            <span class="badge">📈 Strategisch Denker</span>
+        </div>
+
+        <div class="section-title">Hobby's & Interesses</div>
+        <div class="badge-container">
+            <span class="badge">🎸 Gitaar Spelen</span>
+            <span class="badge">🏔️ Bergwandelen</span>
+            <span class="badge">☕ Koffie Freak</span>
+            <span class="badge">🎮 Gaming</span>
+        </div>
+
+        <div class="hobby-icons">
+            🎸 ☕ 💻 🏔️
+        </div>
+    </div>
+
+</body>
+</html>
